@@ -1,19 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Button, Container, Form, Input, Title, Wrapper } from "./styles";
+import {
+  BackgroundImage,
+  Button,
+  Container,
+  Form,
+  Input,
+  Link,
+  Title,
+  Wrapper,
+} from "./styles";
+import axios from "axios";
+import Toast from "../../components/Toast";
 
 function login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastTitle, setToastTitle] = useState("");
+  const [toastDescription, setToastDescription] = useState("");
+
+  async function handleLogin(event) {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/user/session",
+        {
+          email: email,
+          password: password,
+        }
+      );
+      if (response?.data.success) {
+        setToastTitle("Login realizado com sucesso!");
+        setToastDescription("Você será redirecionado para a página inicial!");
+        setShowToast(true);
+
+        setTimeout(() => {
+          setShowToast(false);
+          window.location.href = "/"; // Redirecionamento após ocultar o Toast
+        }, 5000);
+      }
+    } catch (err) {
+      if (err?.response?.status == 400) {
+        setToastTitle("E-mail ou senha inválidos!");
+        setToastDescription("Tente novamente!");
+        setShowToast(true);
+
+        await setTimeout(() => {
+          setShowToast(false);
+        }, 5000);
+      }
+    }
+  }
+
   return (
-    <Container>
+    <Container img="./login.jpg">
+      <BackgroundImage img="./login.jpg" />
       <Wrapper>
         <Title>Login</Title>
 
-        <Form>
-          <Input type="text" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
+        <Form onSubmit={handleLogin}>
+          <Input
+            type="email"
+            value={email}
+            placeholder="E-mail"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            value={password}
+            required
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Button type="submit">Entrar</Button>
         </Form>
+        <Link href="/register">Ainda não tem conta?</Link>
       </Wrapper>
+      {showToast && <Toast title={toastTitle} description={toastDescription} />}
     </Container>
   );
 }
