@@ -21,9 +21,13 @@ import {
 } from "./styles";
 
 function Home() {
+  // const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <Container>
       <Header />
+      {/* {console.log(user.name)} */}
       <ContainerSaldo>
         <SaldoBancario>Saldo Bancario: 3000</SaldoBancario>
       </ContainerSaldo>
@@ -35,7 +39,7 @@ function Home() {
         </ContainerMes>
         <ContainerButtonAdd>
           <ButtonAdd>
-            <Plus src="/plus-bold-white.png"/>
+            <Plus src="/plus-bold-white.png" />
           </ButtonAdd>
         </ContainerButtonAdd>
       </ContainerFunctions>
