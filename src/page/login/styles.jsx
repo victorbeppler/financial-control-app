@@ -23,26 +23,19 @@ export const BackgroundImage = styled.div`
 
 export const Wrapper = styled.div`
   position: absolute;
-  /* top: 0;
-  left: 0; */
-  /* height: 350px; */
-  /* width: 100%; */
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* opacity: 40%; */
 `;
 
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: 900;
-  /* font-weight: bold; */
   color: black;
   text-align: center;
-  /* padding: 20px; */
 `;
 
 export const Form = styled.form`

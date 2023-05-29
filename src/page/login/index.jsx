@@ -34,10 +34,10 @@ function login() {
         setToastTitle("Login realizado com sucesso!");
         setToastDescription("Você será redirecionado para a página inicial!");
         setShowToast(true);
-
+        localStorage.setItem("user", response.data.user);
         setTimeout(() => {
           setShowToast(false);
-          window.location.href = "/"; // Redirecionamento após ocultar o Toast
+          window.location.href = "/";
         }, 5000);
       }
     } catch (err) {
