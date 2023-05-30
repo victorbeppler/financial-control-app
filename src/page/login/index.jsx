@@ -30,11 +30,29 @@ function login() {
           password: password,
         }
       );
+      console.log(response);
       if (response?.data.success) {
+        console.log("Chegou aqui");
         setToastTitle("Login realizado com sucesso!");
         setToastDescription("Você será redirecionado para a página inicial!");
         setShowToast(true);
-        localStorage.setItem("user", response.data.user);
+        console.log(response.data);
+        console.log({
+          id: response.data.user.id,
+          name: response.data.user.name,
+          email: response.data.user.email,
+          token: response.data.token,
+        });
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: response.data.user.id,
+            name: response.data.user.name,
+            email: response.data.user.email,
+            token: response.data.token,
+          })
+        );
+
         setTimeout(() => {
           setShowToast(false);
           window.location.href = "/";
@@ -58,7 +76,6 @@ function login() {
       <BackgroundImage img="./login.jpg" />
       <Wrapper>
         <Title>Login</Title>
-
         <Form onSubmit={handleLogin}>
           <Input
             type="email"
