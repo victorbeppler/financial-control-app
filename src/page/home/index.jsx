@@ -22,7 +22,7 @@ import {
 
 function Home() {
   // const user = localStorage.getItem("user");
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Container>

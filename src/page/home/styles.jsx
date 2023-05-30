@@ -69,7 +69,6 @@ export const Plus = styled.img`
   height: 20px;
   cursor: pointer;
 `;
-
 // o container do botão add precisa ficr no final do containerMes
 export const ContainerButtonAdd = styled.div`
   display: flex;
@@ -78,6 +77,7 @@ export const ContainerButtonAdd = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
+
 export const ButtonAdd = styled.button`
   display: flex;
   justify-content: center;
