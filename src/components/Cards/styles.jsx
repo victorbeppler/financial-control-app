@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 200px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
+
+export const Wrapper = styled.div`
+  width: 250px;
   height: 200px;
   border: 1px solid #000;
   border-radius: 10px;
-  margin: 10px;
+  /* margin: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,12 +26,13 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #000;
 `;
 
 export const Description = styled.p`
   font-size: 1rem;
-  font-weight: 400;
+  padding: 25px;
+  /* font-weight: 400; */
 `;

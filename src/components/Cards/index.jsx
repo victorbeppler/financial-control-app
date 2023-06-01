@@ -1,13 +1,18 @@
 import React from "react";
 
-import { Container, Description, Title } from "./styles";
+import { Container, Description, Title, Wrapper } from "./styles";
 
-function Cards() {
+function Cards({ idEnvironment, title, description }) {
+  async function handleClick() {
+    window.location.href = `/environment/${idEnvironment}}`;
+  }
+
   return (
-    <Container>
-      {/* <h2>Casa Larissa & Victor</h2> */}
-      <Title>Cozinha</Title>
-      <Description>Descrição</Description>
+    <Container onClick={handleClick}>
+      <Wrapper>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
+      </Wrapper>
     </Container>
   );
 }
