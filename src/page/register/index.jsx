@@ -10,8 +10,8 @@ import {
   Title,
   Wrapper,
 } from "./styles";
-import axios from "axios";
 import Toast from "../../components/Toast";
+import ApiBack from "../../services/base-back.js";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -33,14 +33,11 @@ function Register() {
       }, 5000);
     }
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/user/create",
-        {
-          email: email,
-          username: username,
-          password: password,
-        }
-      );
+      const response = await ApiBack.post("/user/create", {
+        email: email,
+        username: username,
+        password: password,
+      });
       if (response?.data.success) {
         setToastTitle("Cadastro realizado com sucesso!");
         setToastDescription("Você será redirecionado para a página de login!");
