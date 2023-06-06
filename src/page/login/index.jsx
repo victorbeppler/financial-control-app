@@ -10,8 +10,8 @@ import {
   Title,
   Wrapper,
 } from "./styles";
-import axios from "axios";
 import Toast from "../../components/Toast";
+import ApiBack from "../../services/base-back.js";
 
 function login() {
   const [email, setEmail] = useState("");
@@ -23,13 +23,10 @@ function login() {
   async function handleLogin(event) {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/user/session",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      const response = await ApiBack.post("/user/session", {
+        email: email,
+        password: password,
+      });
       if (response?.data.success) {
         setToastTitle("Login realizado com sucesso!");
         setToastDescription("Você será redirecionado para a página inicial!");
