@@ -54,8 +54,6 @@ function EnvironmentSelect() {
     }, 5000);
   }
 
-  console.log(user);
-
   return (
     <>
       <Header />
