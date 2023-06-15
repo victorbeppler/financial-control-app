@@ -18,8 +18,8 @@ function CadastroEnvironment({ onClose, UserData, onClick }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(UserData);
-    console.log(name, description, UserData.id);
+    // console.log(UserData);
+    // console.log(name, description, UserData.id);
     const response = await ApiBack.post("/environment/create", {
       name: name,
       description: description,
