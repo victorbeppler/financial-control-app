@@ -2,7 +2,10 @@ import React, { useState } from "react";
 
 import {
   Button,
+  ButtonX,
   Container,
+  ContainerX,
+  Dropdown,
   DropdownButton,
   DropdownContainer,
   DropdownItem,
@@ -10,59 +13,101 @@ import {
   FileInput,
   FormContainer,
   FormGroup,
+  IconX,
   Input,
   Label,
 } from "./styles";
 import { categoryOptions } from "../../services/category-options.js";
+import { StatusOption } from "../../services/status.js";
+import ApiBack from "../../services/base-back";
+import Toast from "../Toast";
+import { useParams } from "react-router-dom";
 
-function CadastroDespesaReceita() {
+function CadastroDespesaReceita({ listOfCategory, onClose }) {
+  const { idEnvironment } = useParams();
+  const [user] = useState(JSON.parse(localStorage.getItem("user")));
+  const [descricao, setDescricao] = useState("");
   const [valor, setValor] = useState("");
   const [data, setData] = useState("");
-  const [arquivos, setArquivos] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(categoryOptions[0].name);
+  const [categorySelected, setCategorySelected] = useState("");
+  const [statusSelected, setStatusSelected] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastTitle, setToastTitle] = useState("");
+  const [toastDescription, setToastDescription] = useState("");
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-  };
-
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Aqui você pode fazer o envio do formulário para o backend
-  };
+
+    try {
+      const response = await ApiBack.post("/transaction/create", {
+        description: descricao,
+        category: categorySelected,
+        value: valor,
+        date: data,
+        status: statusSelected,
+        environment: idEnvironment,
+        user: user.id,
+      });
+      if (response.status === 201) {
+        setToastTitle("Soliciatação enviada com sucesso");
+        setToastDescription("Sua transação foi cadastrada com sucesso!");
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+          onClose();
+        }, 5000);
+      }
+    } catch (error) {
+      console.log(error.response);
+      if (error.response.status === 400) {
+        setToastTitle("Erro ao cadastrar");
+        setToastDescription(
+          error?.response?.data?.error
+            ? error.response.data.error
+            : "Erro interno ao criar a transação!"
+        );
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 5000);
+      }
+    }
+  }
+
   return (
     <Container>
-      <h1>Cadastro de Despesa/Receita</h1>
+      <ContainerX>
+        <ButtonX onClick={onClose}>
+          <IconX src="/x.png" />
+        </ButtonX>
+        <h2>Cadastro de Transações</h2>
+      </ContainerX>
       <FormContainer onSubmit={handleSubmit}>
         <FormGroup>
+          <Label htmlFor="descricao">Descrição</Label>
+          <Input
+            id="descricao"
+            required
+            type="text"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          />
           <Label htmlFor="categoria">Categoria</Label>
-          <DropdownContainer>
-            <DropdownButton
-              onClick={() => setIsOpen(!isOpen)}
-              aria-required="true"
-            >
-              {selectedOption}
-            </DropdownButton>
-            {isOpen && (
-              <DropdownList>
-                {categoryOptions.map((option) => (
-                  <DropdownItem
-                    key={option.id}
-                    onClick={() => handleOptionClick(option.name)}
-                  >
-                    {option.name}
-                  </DropdownItem>
-                ))}
-              </DropdownList>
-            )}
-          </DropdownContainer>
-        </FormGroup>
+          <Dropdown
+            value={categorySelected}
+            required
+            onChange={(e) => setCategorySelected(e.target.value)}
+          >
+            <option value="999">Selecione</option>
+            {listOfCategory.map((item) => (
+              <option value={item.id}>{item.name}</option>
+            ))}
+          </Dropdown>
 
-        <FormGroup>
           <Label htmlFor="valor">Valor</Label>
           <Input
             id="valor"
+            required
             type="text"
             value={valor}
             onChange={(e) => {
@@ -75,33 +120,29 @@ function CadastroDespesaReceita() {
               );
             }}
             placeholder="R$ 0,00"
-            required
           />
-        </FormGroup>
-
-        <FormGroup>
-          <Label htmlFor="data">Data</Label>
+          <Label htmlFor="data">Data de Vencimento</Label>
           <Input
             id="data"
             type="date"
             value={data}
             onChange={(e) => setData(e.target.value)}
+          />
+          <Label htmlFor="status">Status</Label>
+          <Dropdown
+            value={statusSelected}
             required
-          />
+            onChange={(e) => setStatusSelected(e.target.value)}
+          >
+            <option value="999">Selecione</option>
+            {StatusOption.map((item) => (
+              <option value={item.id}>{item.name}</option>
+            ))}
+          </Dropdown>
         </FormGroup>
-
-        <FormGroup>
-          <Label htmlFor="arquivos">Arquivos</Label>
-          <FileInput
-            id="arquivos"
-            type="file"
-            multiple
-            onChange={(e) => setArquivos(e.target.files)}
-          />
-        </FormGroup>
-
         <Button type="submit">Cadastrar</Button>
       </FormContainer>
+      {showToast && <Toast title={toastTitle} description={toastDescription} />}
     </Container>
   );
 }
