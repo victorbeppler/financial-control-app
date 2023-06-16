@@ -126,6 +126,7 @@ function CadastroDespesaReceita({ listOfCategory, onClose }) {
             id="data"
             type="date"
             value={data}
+            required
             onChange={(e) => setData(e.target.value)}
           />
           <Label htmlFor="status">Status</Label>
