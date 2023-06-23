@@ -91,11 +91,11 @@ function Home() {
           </SaldoBancario>
         </ContainerSaldo>
         <ContainerFunctions>
-          <ContainerMes>
+          {/* <ContainerMes>
             <Caret src="/caret-left-fill-black.png" alt="Caret Left" />
             <MesAtual>Maio</MesAtual>
             <Caret src="/caret-right-fill-black.png" alt="Caret Left" />
-          </ContainerMes>
+          </ContainerMes> */}
           <ContainerButtonAdd>
             <DropdownTransaction
               onOpenTransaction={handleOpenTransaction}
