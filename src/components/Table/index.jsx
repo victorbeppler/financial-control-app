@@ -30,7 +30,7 @@ function Table({ transactions }) {
         <TBody>
           {transactions.map((transaction) => {
             return (
-              <TableRowBody>
+              <TableRowBody key={transaction.id}>
                 <TableCell>{transaction.id}</TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{"R$ " + transaction.amount}</TableCell>
