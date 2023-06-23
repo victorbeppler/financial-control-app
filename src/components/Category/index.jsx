@@ -37,7 +37,7 @@ function CategoryForm({ onClose }) {
     console.log(nome, type);
     console.log(idEnvironment);
     console.log(user);
-    if (type === "999") {
+    if (type === "999" || type === "") {
       setToastTitle("Erro ao cadastrar");
       setToastDescription("Selecione uma categoria");
       setShowToast(true);
