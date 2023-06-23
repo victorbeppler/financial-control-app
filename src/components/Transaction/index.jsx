@@ -6,24 +6,18 @@ import {
   Container,
   ContainerX,
   Dropdown,
-  DropdownButton,
-  DropdownContainer,
-  DropdownItem,
-  DropdownList,
-  FileInput,
   FormContainer,
   FormGroup,
   IconX,
   Input,
   Label,
 } from "./styles";
-import { categoryOptions } from "../../services/category-options.js";
 import { StatusOption } from "../../services/status.js";
 import ApiBack from "../../services/base-back";
 import Toast from "../Toast";
 import { useParams } from "react-router-dom";
 
-function CadastroDespesaReceita({ listOfCategory, onClose }) {
+function TransactionForm({ listOfCategory, onClose }) {
   const { idEnvironment } = useParams();
   const [user] = useState(JSON.parse(localStorage.getItem("user")));
   const [descricao, setDescricao] = useState("");
@@ -148,4 +142,4 @@ function CadastroDespesaReceita({ listOfCategory, onClose }) {
   );
 }
 
-export default CadastroDespesaReceita;
+export default TransactionForm;
