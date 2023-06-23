@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   BackgroundImage,
@@ -14,11 +15,14 @@ import Toast from "../../components/Toast";
 import ApiBack from "../../services/base-back.js";
 
 function login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showToast, setShowToast] = useState(false);
-  const [toastTitle, setToastTitle] = useState("");
-  const [toastDescription, setToastDescription] = useState("");
+  const [toast, setToast] = useState({
+    showToast: false,
+    title: "",
+    description: "",
+  });
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -28,9 +32,11 @@ function login() {
         password: password,
       });
       if (response?.data.success) {
-        setToastTitle("Login realizado com sucesso!");
-        setToastDescription("Você será redirecionado para a página inicial!");
-        setShowToast(true);
+        setToast({
+          showToast: true,
+          title: "Login realizado com sucesso!",
+          description: "Você será redirecionado para a página inicial!",
+        });
         localStorage.setItem(
           "user",
           JSON.stringify({
@@ -41,18 +47,44 @@ function login() {
           })
         );
         setTimeout(() => {
-          setShowToast(false);
-          window.location.href = "/";
+          setToast({
+            showToast: false,
+            title: "",
+            description: "",
+          });
+          navigate("/");
         }, 5000);
       }
     } catch (err) {
       if (err?.response?.status == 400) {
-        setToastTitle("E-mail ou senha inválidos!");
-        setToastDescription("Tente novamente!");
-        setShowToast(true);
+        setToastTitle("");
+        setToastDescription("");
+        setToast({
+          showToast: true,
+          title: "Ocorreu um erro ao realizar o login!",
+          description: "E-mail ou senha inválidos, Tente novamente!",
+        });
 
-        await setTimeout(() => {
-          setShowToast(false);
+        setTimeout(() => {
+          setToast({
+            showToast: false,
+            title: "",
+            description: "",
+          });
+        }, 5000);
+      } else {
+        setToast({
+          showToast: true,
+          title: "Ocorreu um erro ao realizar o login!",
+          description: "Tente novamente mais tarde!",
+        });
+
+        setTimeout(() => {
+          setToast({
+            showToast: false,
+            title: "",
+            description: "",
+          });
         }, 5000);
       }
     }
@@ -82,7 +114,9 @@ function login() {
         </Form>
         <Link href="/register">Ainda não tem conta?</Link>
       </Wrapper>
-      {showToast && <Toast title={toastTitle} description={toastDescription} />}
+      {toast.showToast && (
+        <Toast title={toast.title} description={toast.description} />
+      )}
     </Container>
   );
 }
