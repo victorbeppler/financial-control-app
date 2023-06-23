@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Root, Trigger, Portal } from "@radix-ui/react-dropdown-menu";
 import {
   ArrowIco,
@@ -9,39 +9,64 @@ import {
   MenuItem,
 } from "./styles";
 
-function DropdownMenuDemo({ onOpen }) {
+function DropdownMenuDemo({ onOpenTransaction, onOpenCategory }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
   function openModalCreateTransaction() {
-    console.log("openModalCreateTransaction");
-    onOpen();
+    setIsOpen(false);
+    onOpenTransaction();
   }
+
+  function openModalCreateCategory() {
+    setIsOpen(false);
+    onOpenCategory();
+  }
+
+  function open() {
+    setIsOpen(true);
+  }
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <Root>
       <Trigger asChild>
-        <IconButton aria-label="Customise options">
+        <IconButton onClick={open} aria-label="Customise options">
           <Icon src="/gear-bold-white.png" />
         </IconButton>
       </Trigger>
 
-      <Portal>
-        <ContentWrapper sideOffset={5}>
-          <MenuItem
-            onClick={() => {
-              console.log("Olá");
-            }}
-          >
-            <Button>Cadastro de Categoria</Button>
-          </MenuItem>
+      {isOpen && (
+        <Portal>
+          <ContentWrapper sideOffset={5} ref={dropdownRef}>
+            <MenuItem
+              onClick={() => {
+                openModalCreateCategory();
+              }}
+            >
+              <Button>Cadastro de Categoria</Button>
+            </MenuItem>
 
-          <MenuItem lastitem="true">
-            <Button onClick={openModalCreateTransaction}>
-              Cadastro de Transações
-            </Button>
-          </MenuItem>
+            <MenuItem lastitem="true">
+              <Button onClick={openModalCreateTransaction}>
+                Cadastro de Transações
+              </Button>
+            </MenuItem>
 
-          <ArrowIco />
-        </ContentWrapper>
-      </Portal>
+            <ArrowIco />
+          </ContentWrapper>
+        </Portal>
+      )}
     </Root>
   );
 }

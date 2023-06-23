@@ -2,7 +2,7 @@ import { Content, Item, Arrow } from "@radix-ui/react-dropdown-menu";
 import styled, { css } from "styled-components";
 
 export const ContentWrapper = styled(Content)`
-  min-width: 220px;
+  min-width: 100px;
   border-radius: 6px;
   background-color: white;
   border: 1px solid black;
@@ -32,7 +32,7 @@ export const ContentWrapper = styled(Content)`
 `;
 
 export const MenuItem = styled(Item)`
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1;
   color: black;
   border-radius: 3px;
@@ -73,8 +73,8 @@ export const IconButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
   border-radius: 10%;
   background-color: ${(props) => props.theme.colors.primary};
   border: none;
@@ -83,8 +83,8 @@ export const IconButton = styled.button`
 `;
 
 export const Icon = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 `;
 
@@ -148,6 +148,6 @@ export const Button = styled.button`
   margin: 5px;
   border: none;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
 `;
