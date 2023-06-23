@@ -23,7 +23,7 @@ function EnvironmentSelect() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   async function ConsultEnvironments(idUser) {
-    const response = await ApiBack.get(`/environment/${idUser}}`);
+    const response = await ApiBack.get(`/environment/${idUser}`);
     setEnvironments(response.data.success);
   }
 
