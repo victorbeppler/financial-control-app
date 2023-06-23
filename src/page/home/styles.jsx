@@ -1,10 +1,12 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   padding: 0px;
   margin: 0px;
   display: flex;
+  position: absolute;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -25,7 +27,8 @@ export const SaldoBancario = styled.h3`
   border: 1px solid #000;
   border-radius: 10px;
   height: 30px;
-  width: 200px;
+  /* width: 200px; */
+  padding: 0 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   font-weight: bold;
 `;
@@ -98,74 +101,6 @@ export const TableContainer = styled.div`
   border-radius: 15px;
   display: flex;
   flex: 1;
-  width: 80%;
-  @media (max-width: 768px) {
-    overflow: auto;
-  }
-`;
-
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-export const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-  animation: ${fadeIn} 1s;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-`;
-
-export const TableHeader = styled.thead`
-  border-bottom: 1px solid #ddd;
-`;
-
-export const TableHeaderCell = styled.th`
-  text-align: left;
-  padding: 8px;
-  color: #000;
-  font-family: "Roboto", sans-serif;
-  @media (max-width: 1024px) {
-    font-size: 0.8rem;
-  }
-  @media (max-width: 768px) {
-    font-size: 0.6rem;
-  }
-`;
-
-export const TableRowBody = styled.tr`
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  transition: transform 0.2;
-
-  &:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  &:hover {
-    outline: 1px solid red;
-    cursor: pointer;
-    box-shadow: 0 0 10px red;
-    transform: translateY(-2px);
-    font-size: 1rem;
-    font-weight: 300;
-  }
-  @media (max-width: 1024px) {
-    font-size: 0.8rem;
-  }
-  @media (max-width: 768px) {
-    font-size: 0.6rem;
-  }
-`;
-
-export const TableRow = styled.tr``;
-
-export const TableCell = styled.td`
-  text-align: left;
-  padding: 8px;
-  font-family: "Roboto", sans-serif;
+  width: 85%;
+  /* height: 80%; */
 `;
