@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ApiBack = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://back.expense.victorbeppler.dev/api",
 });
 
 export default ApiBack;
