@@ -1,0 +1,13 @@
+version: '2.2'
+
+services:
+  frontend:
+    image: frontend-we-expense
+    build: .
+    ports:
+      - "7005:7005"
+    restart: on-failure
+    container_name: frontend-we-expense
+    volumes:
+      - .:/app
+      - /app/node_modules
