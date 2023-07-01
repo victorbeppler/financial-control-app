@@ -8,13 +8,14 @@ import {
   Form,
   Input,
   Link,
+  Logo,
   Title,
   Wrapper,
 } from "./styles";
 import Toast from "../../components/Toast";
 import ApiBack from "../../services/base-back.js";
 
-function login() {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -94,6 +95,7 @@ function login() {
     <Container img="./login.jpg">
       <BackgroundImage img="./login.jpg" />
       <Wrapper>
+        <Logo src="./logo/logo_transparent.png" alt="Logo" />
         <Title>Login</Title>
         <Form onSubmit={handleLogin}>
           <Input
@@ -121,4 +123,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

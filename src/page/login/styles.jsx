@@ -88,3 +88,8 @@ export const Link = styled.a`
     color: #5600c6;
   }
 `;
+
+export const Logo = styled.img`
+  width: 200px;
+  height: 200px;
+`;
