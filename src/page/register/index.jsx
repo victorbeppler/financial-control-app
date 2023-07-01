@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   BackgroundImage,
@@ -14,24 +15,36 @@ import Toast from "../../components/Toast";
 import ApiBack from "../../services/base-back.js";
 
 function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [username, setUsername] = useState("");
-  const [showToast, setShowToast] = useState(false);
-  const [toastTitle, setToastTitle] = useState("");
-  const [toastDescription, setToastDescription] = useState("");
+  const [toast, setToast] = useState({
+    showToast: false,
+    title: "",
+    description: "",
+  });
+
+  const showToastMessage = (title, description, pushNavigate, callback) => {
+    setToast({ showToast: true, title, description });
+    setTimeout(() => {
+      setToast({ showToast: false, title: "", description: "" });
+      if (pushNavigate) navigate("/login");
+      if (callback) callback();
+    }, 5000);
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (password !== passwordConfirmation) {
-      setToastTitle("Senhas não coincidem!");
-      setToastDescription("Tente novamente!");
-      setShowToast(true);
-      await setTimeout(() => {
-        setShowToast(false);
-      }, 5000);
+      return showToastMessage(
+        "As senhas não coincidem!",
+        "Tente novamente!",
+        false
+      );
     }
+
     try {
       const response = await ApiBack.post("/user/create", {
         email: email,
@@ -39,27 +52,26 @@ function Register() {
         password: password,
       });
       if (response?.data.success) {
-        setToastTitle("Cadastro realizado com sucesso!");
-        setToastDescription("Você será redirecionado para a página de login!");
-        setShowToast(true);
-
-        setTimeout(() => {
-          setShowToast(false);
-          window.location.href = "/login";
-        }, 5000);
+        return showToastMessage(
+          "Cadastro realizado com sucesso!",
+          "Você será redirecionado para a página de login!",
+          true
+        );
       }
     } catch (err) {
       if (err?.response?.status == 400) {
-        setToastTitle(err.response.data.type);
-        setToastDescription("Tente novamente!");
-        setShowToast(true);
-
-        setTimeout(() => {
-          setShowToast(false);
-        }, 5000);
+        return showToastMessage(
+          "Erro ao realizar o cadastro!",
+          "Tente novamente!",
+          false
+        );
       }
     }
   }
+
+  const handleChange = (setter) => (event) => {
+    setter(event.target.value);
+  };
 
   return (
     <Container>
@@ -71,33 +83,39 @@ function Register() {
           <Input
             type="text"
             required
+            autoComplete="username"
             placeholder="Nome de Usuário"
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={handleChange(setUsername)}
           />
           <Input
             type="email"
             required
+            autoComplete="email"
             placeholder="E-mail"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleChange(setEmail)}
           />
           <Input
             type="password"
             required
+            autoComplete="new-password"
             placeholder="Senha"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange(setPassword)}
           />
           <Input
             type="password"
             required
+            autoComplete="new-password"
             placeholder="Repita a senha"
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            onChange={handleChange(setPasswordConfirmation)}
           />
 
           <Button type="submit">Cadastrar</Button>
         </Form>
         <Link href="/login">Já possui conta?</Link>
       </Wrapper>
-      {showToast && <Toast title={toastTitle} description={toastDescription} />}
+      {toast.showToast && (
+        <Toast title={toast.title} description={toast.description} />
+      )}
     </Container>
   );
 }
