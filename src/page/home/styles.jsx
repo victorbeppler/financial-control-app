@@ -13,7 +13,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerSaldo = styled.div`
-  width: 83%;
+  width: 87%;
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
@@ -44,7 +44,7 @@ export const ContainerFunctions = styled.div`
 `;
 
 export const ContainerMes = styled.div`
-  width: 83%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,7 +75,7 @@ export const Plus = styled.img`
 // o container do botão add precisa ficr no final do containerMes
 export const ContainerButtonAdd = styled.div`
   display: flex;
-  width: 100%;
+  width: 50px;
   align-items: center;
   justify-content: flex-end;
   align-items: center;
@@ -103,4 +103,14 @@ export const TableContainer = styled.div`
   flex: 1;
   width: 85%;
   /* height: 80%; */
+`;
+
+export const ButtonArrow = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
 `;

@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import TransactionForm from "../../components/Transaction";
 import Header from "../../components/Header";
@@ -8,7 +8,9 @@ import DropdownTransaction from "../../components/DropdownTransaction";
 import CategoryForm from "../../components/Category";
 import Toast from "../../components/Toast";
 import ApiBack from "../../services/base-back";
+import { DateFormatService } from "../../services/date-format";
 import {
+  ButtonArrow,
   Caret,
   Container,
   ContainerButtonAdd,
@@ -20,6 +22,7 @@ import {
 } from "./styles";
 
 function Home() {
+  const history = useNavigate();
   const { idEnvironment } = useParams();
   const [category, setCategory] = useState([]);
   const [transaction, setTransaction] = useState([]);
@@ -30,15 +33,25 @@ function Home() {
     useState(false);
   const [isModalCreateCategory, setIsModalCreateCategory] = useState(false);
   const [bankAccount, setBanckAccount] = useState(0);
+  const [date, setDate] = useState({
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+    nameMonth: "",
+  });
 
   async function ConsultTransaction() {
-    const response = await ApiBack.get(`/transaction/${idEnvironment}`);
+    const response = await ApiBack.get(
+      `/transaction/${idEnvironment}/${date.year}-${date.month}`
+    );
     if (response.status === 200) {
       let amountBanckAccount = 0;
       setTransaction(response.data);
       for (const transc of response.data) {
         if (transc.category.type === "Income") {
           amountBanckAccount = amountBanckAccount + transc.amount;
+        }
+        if (transc.category.type === "Expense") {
+          amountBanckAccount = amountBanckAccount - transc.amount;
         }
       }
       setBanckAccount(amountBanckAccount);
@@ -66,20 +79,78 @@ function Home() {
     setIsModalCreateCategory(true);
   };
 
-  useEffect(
-    () => {
-      const user = JSON.parse(localStorage.getItem("user"));
-      if (!user) {
-        window.location.href = "/login";
-        return;
+  async function actualizeMonth() {
+    try {
+      const monthName = await new DateFormatService().format(date.month);
+      setDate((prevState) => ({
+        ...prevState,
+        nameMonth: monthName,
+      }));
+    } catch (error) {
+      console.log("Ocorreu um erro ao formatar o mês: ", error);
+    }
+  }
+
+  async function handlePreviousMonth() {
+    const { month, year } = await incrementMonth(false);
+    const monthName = await new DateFormatService().format(month);
+    setDate({
+      month: month,
+      year: year,
+      nameMonth: monthName,
+    });
+  }
+
+  async function handleNextMonth() {
+    const { month, year } = await incrementMonth(true);
+    const monthName = await new DateFormatService().format(month);
+    setDate({
+      month: month,
+      year: year,
+      nameMonth: monthName,
+    });
+  }
+
+  async function incrementMonth(increment) {
+    let newMonth = date.month;
+    let newYear = date.year;
+
+    if (increment) {
+      if (newMonth === 12) {
+        newMonth = 1;
+        newYear = newYear + 1;
+      } else {
+        newMonth = newMonth + 1;
       }
-      ConsultCategory();
-      ConsultTransaction();
-    },
-    [localStorage.getItem("user")],
-    isModalCreateCategory,
-    isModalCreateDespesaReceita
-  );
+    } else {
+      if (newMonth === 1) {
+        newMonth = 12;
+        newYear = newYear - 1;
+      } else {
+        newMonth = newMonth - 1;
+      }
+    }
+
+    return {
+      month: newMonth,
+      year: newYear,
+    };
+  }
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      history("/login");
+      return;
+    }
+    actualizeMonth();
+    ConsultCategory();
+    ConsultTransaction();
+  }, [localStorage.getItem("user"), history]);
+
+  useEffect(() => {
+    ConsultTransaction();
+  }, [date]);
 
   return (
     <>
@@ -91,11 +162,17 @@ function Home() {
           </SaldoBancario>
         </ContainerSaldo>
         <ContainerFunctions>
-          {/* <ContainerMes>
-            <Caret src="/caret-left-fill-black.png" alt="Caret Left" />
-            <MesAtual>Maio</MesAtual>
-            <Caret src="/caret-right-fill-black.png" alt="Caret Left" />
-          </ContainerMes> */}
+          <ContainerMes>
+            <ButtonArrow onClick={handlePreviousMonth}>
+              <Caret src="/caret-left-fill-black.png" alt="Caret Left" />
+            </ButtonArrow>
+            <MesAtual>
+              {date.nameMonth} - {date.year}
+            </MesAtual>
+            <ButtonArrow onClick={handleNextMonth}>
+              <Caret src="/caret-right-fill-black.png" alt="Caret Left" />
+            </ButtonArrow>
+          </ContainerMes>
           <ContainerButtonAdd>
             <DropdownTransaction
               onOpenTransaction={handleOpenTransaction}
