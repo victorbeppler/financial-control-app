@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const ToastHeader = styled.div`
-  background-color: #5600c6;
+  background-color: ${(props) => props.theme.colors.primary};
   color: #fff;
   padding: 8px 16px;
 `;
