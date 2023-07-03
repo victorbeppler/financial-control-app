@@ -21,6 +21,7 @@ export const BackgroundImage = styled.div`
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   filter: blur(3px);
 `;
 
