@@ -100,7 +100,7 @@ export const Link = styled.a`
   text-decoration: none;
   :hover {
     text-decoration: underline;
-    color: #5600c6;
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 
