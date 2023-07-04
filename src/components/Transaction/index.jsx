@@ -43,7 +43,7 @@ function TransactionForm({ listOfCategory, onClose }) {
         user: user.id,
       });
       if (response.status === 201) {
-        setToastTitle("Soliciatação enviada com sucesso");
+        setToastTitle("Solicitação enviada com sucesso");
         setToastDescription("Sua transação foi cadastrada com sucesso!");
         setShowToast(true);
         setTimeout(() => {
