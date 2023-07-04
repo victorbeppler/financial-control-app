@@ -35,9 +35,8 @@ export const Wrapper = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     width: 80vw;
-    height: 70vh;
+    height: 77vh;
   }
-  @media ()
 `;
 
 export const Title = styled.h1`
@@ -55,6 +54,7 @@ export const Form = styled.form`
   @media (max-width: 768px) {
     width: 80vw;
     align-items: center;
+    gap: 10px;
   }
 `;
 
