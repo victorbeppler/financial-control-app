@@ -7,6 +7,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const BackgroundImage = styled.div`
@@ -18,31 +21,29 @@ export const BackgroundImage = styled.div`
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   filter: blur(3px);
 `;
 
 export const Wrapper = styled.div`
   position: absolute;
-  /* top: 0;
-  left: 0; */
-  /* height: 350px; */
-  /* width: 100%; */
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* opacity: 40%; */
+  @media (max-width: 768px) {
+    width: 80vw;
+    height: 60vh;
+  }
 `;
 
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: 900;
-  /* font-weight: bold; */
   color: black;
   text-align: center;
-  /* padding: 20px; */
 `;
 
 export const Form = styled.form`
@@ -50,6 +51,10 @@ export const Form = styled.form`
   flex-direction: column;
   padding: 20px;
   gap: 30px;
+  @media (max-width: 768px) {
+    width: 80vw;
+    align-items: center;
+  }
 `;
 
 export const Input = styled.input`
@@ -59,9 +64,15 @@ export const Input = styled.input`
   border: 1px solid black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding-left: 10px;
+  ::target-text {
+    padding-left: 10px;
+  }
   :focus {
     outline: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  @media (max-width: 768px) {
+    width: 70vw;
   }
 `;
 
@@ -70,7 +81,7 @@ export const Button = styled.button`
   padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid black;
-  background-color: #5600c6;
+  background-color: ${(props) => props.theme.colors.primary};
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -89,6 +100,6 @@ export const Link = styled.a`
   text-decoration: none;
   :hover {
     text-decoration: underline;
-    color: #5600c6;
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
