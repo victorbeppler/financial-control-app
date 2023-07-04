@@ -1,8 +1,7 @@
 import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -12,6 +11,7 @@ export const Container = styled.div`
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 `;
 
 export const Title = styled.h1`
@@ -32,6 +32,11 @@ export const Wrapp = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 90vw;
+    height: 100%;
+    border-radius: 0px;
+  }
 `;
 
 export const ContainerButtonAdd = styled.div`
