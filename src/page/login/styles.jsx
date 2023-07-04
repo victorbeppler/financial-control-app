@@ -35,8 +35,9 @@ export const Wrapper = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     width: 80vw;
-    height: 60vh;
+    height: 70vh;
   }
+  @media ()
 `;
 
 export const Title = styled.h1`
