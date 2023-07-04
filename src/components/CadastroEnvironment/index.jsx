@@ -9,6 +9,7 @@ import {
   IconX,
   Input,
   TextArea,
+  Title,
 } from "./styles";
 import ApiBack from "../../services/base-back.js";
 
@@ -18,8 +19,6 @@ function CadastroEnvironment({ onClose, UserData, onClick }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // console.log(UserData);
-    // console.log(name, description, UserData.id);
     const response = await ApiBack.post("/environment/create", {
       name: name,
       description: description,
@@ -32,7 +31,7 @@ function CadastroEnvironment({ onClose, UserData, onClick }) {
 
   return (
     <Container>
-      <h1>Cadastro de Ambiente</h1>
+      <Title>Cadastro de Ambiente</Title>
       <ContainerX>
         <ButtonX onClick={onClose}>
           <IconX src="/x.png" />
