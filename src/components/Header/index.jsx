@@ -24,7 +24,6 @@ function Header() {
 
   return (
     <Container>
-      {/* {<h1>{user.name}</h1>} */}
       <ContainerHome>
         <ButtonHome onClick={handleHome}>
           <Icon src="/house-bold.png" />
