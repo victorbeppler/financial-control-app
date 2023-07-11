@@ -80,6 +80,7 @@ export const TableCell = styled.td`
   text-align: left;
   padding: 8px;
   font-family: "Roboto", sans-serif;
+
   @media (max-width: 768px) {
     font-size: 0.6rem;
     transition: transform 0.2;
