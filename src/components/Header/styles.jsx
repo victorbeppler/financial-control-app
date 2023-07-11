@@ -21,7 +21,7 @@ export const Icon = styled.img`
 `;
 
 export const ContainerHome = styled.div`
-  width: 90%;
+  width: 70%;
   display: flex;
   padding-left: 50px;
   justify-content: flex-start;
@@ -29,7 +29,7 @@ export const ContainerHome = styled.div`
 `;
 
 export const ContainerSingOut = styled.div`
-  width: 10%;
+  width: 30%;
   padding-right: 50px;
   display: flex;
   justify-content: flex-end;
@@ -50,4 +50,9 @@ export const ButtonHome = styled.button`
   align-items: center;
   background-color: transparent;
   border: none;
+`;
+
+export const NameUser = styled.h2`
+  color: white;
+  padding-right: 20px;
 `;

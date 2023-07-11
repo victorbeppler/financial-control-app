@@ -7,6 +7,7 @@ import {
   ContainerHome,
   ContainerSingOut,
   Icon,
+  NameUser,
 } from "./styles";
 
 function Header() {
@@ -31,6 +32,7 @@ function Header() {
       </ContainerHome>
       <ContainerSingOut>
         <ButtonSingOut onClick={handleSingOut}>
+          <NameUser>{user.name}</NameUser>
           <Icon src="/sign-out-bold.png" />
         </ButtonSingOut>
       </ContainerSingOut>
