@@ -150,4 +150,5 @@ export const Button = styled.button`
   background-color: transparent;
   font-size: 14px;
   cursor: pointer;
+  color: black;
 `;
