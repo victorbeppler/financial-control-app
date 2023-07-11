@@ -74,8 +74,8 @@ function TransactionForm({ listOfCategory, onClose }) {
         <ButtonX onClick={onClose}>
           <IconX src="/x.png" />
         </ButtonX>
-        <h2>Cadastro de Transações</h2>
       </ContainerX>
+      <h2>Cadastro de Transações</h2>
       <FormContainer onSubmit={handleSubmit}>
         <FormGroup>
           <Label htmlFor="descricao">Descrição</Label>
