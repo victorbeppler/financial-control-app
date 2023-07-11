@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   width: 100vw;
+  height: 100vh;
   padding: 0px;
   margin: 0px;
   display: flex;
