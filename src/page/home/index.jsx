@@ -24,6 +24,7 @@ import {
 function Home() {
   const history = useNavigate();
   const { idEnvironment } = useParams();
+  const Environment = JSON.parse(localStorage.getItem("Environment"));
   const [category, setCategory] = useState([]);
   const [transaction, setTransaction] = useState([]);
   const [showToast, setShowToast] = useState(false);
@@ -38,6 +39,7 @@ function Home() {
     year: new Date().getFullYear(),
     nameMonth: "",
   });
+  console.log(Environment);
 
   async function ConsultTransaction() {
     const response = await ApiBack.get(
@@ -156,6 +158,7 @@ function Home() {
     <>
       <Container>
         <Header />
+        <h1>{Environment.title}</h1>
         <ContainerSaldo>
           <SaldoBancario>
             Saldo Bancario: R$ {bankAccount ? bankAccount : 0}
