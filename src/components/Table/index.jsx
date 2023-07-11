@@ -17,13 +17,13 @@ function Table({ transactions }) {
       <TableForm>
         <Header>
           <TableRow>
-            <HeaderRow>#</HeaderRow>
+            <HeaderRow hideOnSmall>#</HeaderRow>
             <HeaderRow>Descricao</HeaderRow>
             <HeaderRow>Valor</HeaderRow>
             <HeaderRow>Status</HeaderRow>
-            <HeaderRow>Categoria</HeaderRow>
+            <HeaderRow hideOnSmall>Categoria</HeaderRow>
             <HeaderRow>Tipo de Lancamento</HeaderRow>
-            <HeaderRow>Adicionado Por</HeaderRow>
+            <HeaderRow hideOnSmall>Adicionado Por</HeaderRow>
             <HeaderRow>Data de Vencimento</HeaderRow>
           </TableRow>
         </Header>
@@ -31,13 +31,13 @@ function Table({ transactions }) {
           {transactions.map((transaction) => {
             return (
               <TableRowBody key={transaction.id}>
-                <TableCell>{transaction.id}</TableCell>
+                <TableCell hideOnSmall>{transaction.id}</TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{"R$ " + transaction.amount}</TableCell>
                 <TableCell>{transaction.status}</TableCell>
-                <TableCell>{transaction.category.name}</TableCell>
+                <TableCell hideOnSmall>{transaction.category.name}</TableCell>
                 <TableCell>{transaction.category.type}</TableCell>
-                <TableCell>{transaction.user.name}</TableCell>
+                <TableCell hideOnSmall>{transaction.user.name}</TableCell>
                 <TableCell>{transaction.dueDate}</TableCell>
               </TableRowBody>
             );

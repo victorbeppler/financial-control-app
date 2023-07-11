@@ -32,10 +32,10 @@ export const Header = styled.thead`
 `;
 
 export const TableRow = styled.tr`
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    transition: transform 0.2;
-    height: 10px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  transition: transform 0.2;
+  height: 10px;
 `;
 
 export const HeaderRow = styled.th`
@@ -48,6 +48,7 @@ export const HeaderRow = styled.th`
   }
   @media (max-width: 768px) {
     font-size: 0.6rem;
+    display: ${(props) => (props.hideOnSmall ? "none" : "table-cell")};
   }
 `;
 export const TableRowBody = styled.tr`
@@ -74,18 +75,25 @@ export const TableRowBody = styled.tr`
   }
 `;
 
-
-
 export const TableCell = styled.td`
   height: auto;
   text-align: left;
   padding: 8px;
   font-family: "Roboto", sans-serif;
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
+    transition: transform 0.2;
+    display: ${(props) => (props.hideOnSmall ? "none" : "table-cell")};
+  }
 `;
 
 export const TBody = styled.tbody`
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  transition: transform 0.2;
+  height: 10px;
+  @media (max-width: 768px) {
+    font-size: 0.6rem;
     transition: transform 0.2;
-    height: 10px;
+  }
 `;
