@@ -24,10 +24,10 @@ export const Title = styled.h1`
 export const Wrapp = styled.div`
   position: relative;
   width: 80%;
-  min-height: 70vh;
+  height: 70vh;
   margin: 0px;
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
+  border-radius: 30px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -35,8 +35,9 @@ export const Wrapp = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     width: 90vw;
-    height: 100%;
-    border-radius: 0px;
+    height: 90vh;
+    margin-top: 50px;
+    border-radius: 20px;
   }
 `;
 
