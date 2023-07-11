@@ -12,6 +12,9 @@ export const Container = styled.div`
   border-radius: 30px;
   padding: 0px 0px 30px 0px;
   background-color: #fff;
+  @media (max-width: 768px) {
+    max-width: 80%;
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -59,6 +62,8 @@ export const ContainerX = styled.div`
   align-items: center;
   justify-content: flex-end;
   align-items: center;
+  margin-bottom: 20px;
+  position: flex;
 `;
 
 export const ButtonX = styled.button`

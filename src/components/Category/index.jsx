@@ -94,8 +94,8 @@ function CategoryForm({ onClose }) {
         <ButtonX onClick={onClose}>
           <IconX src="/x.png" />
         </ButtonX>
-        <h2>Cadastro de Categoria</h2>
       </ContainerX>
+      <h2>Cadastro de Categoria</h2>
       <FormContainer onSubmit={handleSubmit}>
         <FormGroup>
           <Label htmlFor="name">Nome</Label>
