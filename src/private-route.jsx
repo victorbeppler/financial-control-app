@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import checkAuth from "./auth/check-auth";
+import LoadingSpinner from "./components/Loading";
 
 function PrivateRoute({ children }) {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function PrivateRoute({ children }) {
   }, [navigate]);
 
   if (isLoading) {
-    return <div>Carregando...</div>; // Mostrar um spinner de carregamento aqui
+    return <LoadingSpinner />; // Mostrar um spinner de carregamento aqui
   }
 
   return children;
