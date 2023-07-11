@@ -18,6 +18,9 @@ export const ContainerSaldo = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const SaldoBancario = styled.h3`
