@@ -113,3 +113,20 @@ export const Logo = styled.img`
     height: 150px;
   }
 `;
+
+
+export const PasswordInputContainer = styled.div`
+  position: relative;
+  width: 400px;
+  @media (max-width: 768px) {
+    width: 70vw;
+  }
+`;
+
+export const PasswordViewIcon = styled.div`
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+`;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import {
   BackgroundImage,
@@ -9,6 +10,8 @@ import {
   Input,
   Link,
   Logo,
+  PasswordInputContainer,
+  PasswordViewIcon,
   Title,
   Wrapper,
 } from "./styles";
@@ -19,6 +22,7 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [toast, setToast] = useState({
     showToast: false,
     title: "",
@@ -105,13 +109,18 @@ function Login() {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            type="password"
-            value={password}
-            required
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <PasswordInputContainer>
+            <Input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              required
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <PasswordViewIcon onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </PasswordViewIcon>
+          </PasswordInputContainer>
           <Button type="submit">Entrar</Button>
         </Form>
         <Link href="/register">Ainda não tem conta?</Link>
