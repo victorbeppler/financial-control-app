@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Container,
@@ -10,8 +10,21 @@ import {
   TBody,
   HeaderRow,
 } from "./styles";
+import EditTransaction from "../ModalTransaction";
 
 function Table({ transactions }) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+  async function handleOpenModal(transaction) {
+    setSelectedTransaction(transaction);
+    setShowModal(true);
+  }
+
+  async function handleCloseModal() {
+    setShowModal(false);
+  }
+
   return (
     <Container>
       <TableForm>
@@ -30,10 +43,12 @@ function Table({ transactions }) {
         <TBody>
           {transactions.map((transaction) => {
             return (
-              <TableRowBody key={transaction.id}>
+              <TableRowBody
+                key={transaction.id}
+                onClick={() => handleOpenModal(transaction)}
+              >
                 <TableCell hideOnSmall>{transaction.id}</TableCell>
                 <TableCell>{transaction.description}</TableCell>
-                {/* // quando for despesa, o valor deve ser negativo */}
                 <TableCell transactionType={transaction.category.type}>
                   {transaction.category.type === "Expense"
                     ? "- R$ " + transaction.amount
@@ -53,6 +68,12 @@ function Table({ transactions }) {
           })}
         </TBody>
       </TableForm>
+      {showModal && (
+        <EditTransaction
+          onClose={handleCloseModal}
+          transaction={selectedTransaction}
+        />
+      )}
     </Container>
   );
 }

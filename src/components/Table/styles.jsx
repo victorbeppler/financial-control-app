@@ -8,6 +8,8 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   width: 85%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const fadeIn = keyframes`
