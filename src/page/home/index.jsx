@@ -156,8 +156,8 @@ function Home() {
 
   return (
     <>
+      <Header />
       <Container>
-        <Header />
         <h1>{Environment.title}</h1>
         <ContainerSaldo>
           <SaldoBancario>
