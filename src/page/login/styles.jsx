@@ -114,19 +114,18 @@ export const Logo = styled.img`
   }
 `;
 
-
 export const PasswordInputContainer = styled.div`
   position: relative;
-  width: 400px;
-  @media (max-width: 768px) {
-    width: 70vw;
-  }
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 30px;
 `;
 
 export const PasswordViewIcon = styled.div`
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  right: 15px;
+  top: 55%;
+  right: 10px;
   transform: translateY(-50%);
 `;
