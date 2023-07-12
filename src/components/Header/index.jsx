@@ -30,8 +30,8 @@ function Header() {
         </ButtonHome>
       </ContainerHome>
       <ContainerSingOut>
+        <NameUser>{user.name}</NameUser>
         <ButtonSingOut onClick={handleSingOut}>
-          <NameUser>{user.name}</NameUser>
           <Icon src="/sign-out-bold.png" />
         </ButtonSingOut>
       </ContainerSingOut>
