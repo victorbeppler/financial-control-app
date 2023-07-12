@@ -49,6 +49,7 @@ function TransactionForm({ listOfCategory, onClose }) {
         setTimeout(() => {
           setShowToast(false);
           onClose();
+          window.location.reload();
         }, 3000);
       }
     } catch (error) {
