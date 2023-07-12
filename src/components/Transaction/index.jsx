@@ -49,7 +49,7 @@ function TransactionForm({ listOfCategory, onClose }) {
         setTimeout(() => {
           setShowToast(false);
           onClose();
-        }, 5000);
+        }, 3000);
       }
     } catch (error) {
       console.log(error.response);
@@ -63,7 +63,7 @@ function TransactionForm({ listOfCategory, onClose }) {
         setShowToast(true);
         setTimeout(() => {
           setShowToast(false);
-        }, 5000);
+        }, 3000);
       }
     }
   }
