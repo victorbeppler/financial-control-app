@@ -14,6 +14,9 @@ export const Container = styled.div`
   border-radius: 30px;
   background-color: #fff;
   z-index: 1000;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const ContainerX = styled.div`
