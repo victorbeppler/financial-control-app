@@ -87,9 +87,7 @@ function Home() {
         ...prevState,
         nameMonth: monthName,
       }));
-    } catch (error) {
-      // console.log("Ocorreu um erro ao formatar o mês: ", error);
-    }
+    } catch (error) {}
   }
 
   async function handlePreviousMonth() {

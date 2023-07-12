@@ -52,7 +52,6 @@ function TransactionForm({ listOfCategory, onClose }) {
         }, 3000);
       }
     } catch (error) {
-      console.log(error.response);
       if (error.response.status === 400) {
         setToastTitle("Erro ao cadastrar");
         setToastDescription(

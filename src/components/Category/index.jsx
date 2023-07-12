@@ -34,9 +34,6 @@ function CategoryForm({ onClose }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(nome, type);
-    console.log(idEnvironment);
-    console.log(user);
     if (type === "999" || type === "") {
       setToastTitle("Erro ao cadastrar");
       setToastDescription("Selecione uma categoria");
@@ -53,7 +50,6 @@ function CategoryForm({ onClose }) {
         environment: idEnvironment,
         user: user.id,
       });
-      console.log(response);
       if (response.status === 201) {
         setToastTitle("Soliciatação enviada com sucesso");
         setToastDescription("Sua Categoria foi cadastrada com sucesso!");
@@ -64,7 +60,6 @@ function CategoryForm({ onClose }) {
         }, 3000);
       }
     } catch (error) {
-      console.log(error);
       if (error.response.status === 400) {
         setToastTitle("Erro ao cadastrar");
         setToastDescription(
