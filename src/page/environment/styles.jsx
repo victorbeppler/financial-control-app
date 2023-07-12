@@ -35,7 +35,7 @@ export const Wrapp = styled.div`
   justify-content: center;
   @media (max-width: 768px) {
     width: 90vw;
-    height: 90vh;
+    height: 80vh;
     margin-top: 50px;
     border-radius: 20px;
   }
