@@ -39,7 +39,6 @@ function Home() {
     year: new Date().getFullYear(),
     nameMonth: "",
   });
-  console.log(Environment);
 
   async function ConsultTransaction() {
     const response = await ApiBack.get(
@@ -89,7 +88,7 @@ function Home() {
         nameMonth: monthName,
       }));
     } catch (error) {
-      console.log("Ocorreu um erro ao formatar o mês: ", error);
+      // console.log("Ocorreu um erro ao formatar o mês: ", error);
     }
   }
 
