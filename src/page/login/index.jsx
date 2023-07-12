@@ -58,7 +58,7 @@ function Login() {
             description: "",
           });
           navigate("/");
-        }, 5000);
+        }, 3000);
       }
     } catch (err) {
       if (err?.response?.status == 400) {
@@ -76,7 +76,7 @@ function Login() {
             title: "",
             description: "",
           });
-        }, 5000);
+        }, 3000);
       } else {
         setToast({
           showToast: true,
@@ -90,7 +90,7 @@ function Login() {
             title: "",
             description: "",
           });
-        }, 5000);
+        }, 3000);
       }
     }
   }
