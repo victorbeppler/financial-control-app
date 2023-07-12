@@ -79,3 +79,15 @@ export const ButtonCancel = styled.button`
   font-size: 16px;
   cursor: pointer;
 `;
+
+export const Title = styled.h2`
+  color: black;
+  border-bottom: 1px solid black;
+`;
+
+export const ContainerInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;

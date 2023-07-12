@@ -6,14 +6,16 @@ import {
   ButtonX,
   Container,
   ContainerButtons,
+  ContainerInfo,
   ContainerX,
   IconX,
+  Title,
 } from "./styles.jsx";
 
 import Toast from "../Toast/index.jsx";
 import ApiBack from "../../services/base-back.js";
 
-function EditTransaction({ onClose, transaction }) {
+function EditTransaction({ onClose, transaction, toastInfo }) {
   const [toast, setToast] = useState({
     showToast: false,
     title: "",
@@ -26,35 +28,36 @@ function EditTransaction({ onClose, transaction }) {
       `/transaction/delete/${transaction.id}`
     );
     if (response?.data?.success) {
-      setToast({
-        showToast: true,
-        title: "Notificação",
-        description: "Transação deletada com sucesso",
-      });
       setTimeout(() => {
-        setToast({
-          showToast: false,
-          title: "",
-          description: "",
-        });
         onClose();
         window.location.reload();
       }, 2300);
     } else {
-      setToast({
-        showToast: true,
-        title: "Notificação",
-        description: "Erro ao deletar transação",
-      });
       setTimeout(() => {
-        setToast({
-          showToast: false,
-          title: "",
-          description: "",
-        });
         onClose();
       }, 2300);
     }
+  }
+
+  async function editTransaction() {
+    // toastInfo({
+    //   showToast: true,
+    //   title: "Notificação",
+    //   description: "Edição de transação em andamento.",
+    // })
+    // setToast({
+    //   showToast: true,
+    //   title: "Notificação",
+    //   description: "Edição de transação em andamento.",
+    // });
+    // setTimeout(() => {
+    //   setToast({
+    //     showToast: false,
+    //     title: "",
+    //     description: "",
+    //   });
+    //   onClose();
+    // }, 2300);
   }
 
   return (
@@ -64,9 +67,18 @@ function EditTransaction({ onClose, transaction }) {
           <IconX src="/x.png" />
         </ButtonX>
       </ContainerX>
-      <h2>{transaction.description}</h2>
+      <Title>{transaction.description}</Title>
+      <ContainerInfo>
+        <p>Valor: {transaction.amount}</p>
+        <p>
+          Tipo: {transaction.category.type === "Income" ? "Receita" : "Despesa"}
+        </p>
+        <p>Status: {transaction.status}</p>
+        <p>Categoria: {transaction.category.name}</p>
+        <p>Data: {transaction.dueDate}</p>
+      </ContainerInfo>
       <ContainerButtons>
-        <ButtonConfirm>Editar</ButtonConfirm>
+        <ButtonConfirm onClick={editTransaction}>Editar</ButtonConfirm>
         <ButtonCancel onClick={deleteTransaction}>Excluir</ButtonCancel>
       </ContainerButtons>
 
