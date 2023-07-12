@@ -56,12 +56,12 @@ function CategoryForm({ onClose }) {
       console.log(response);
       if (response.status === 201) {
         setToastTitle("Soliciatação enviada com sucesso");
-        setToastDescription("Sua transação foi cadastrada com sucesso!");
+        setToastDescription("Sua Categoria foi cadastrada com sucesso!");
         setShowToast(true);
         setTimeout(() => {
           setShowToast(false);
           onClose();
-        }, 5000);
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +75,7 @@ function CategoryForm({ onClose }) {
         setShowToast(true);
         setTimeout(() => {
           setShowToast(false);
-        }, 5000);
+        }, 3000);
       }
       if (error.message == "Selecione uma categoria") {
         setToastTitle("Erro ao cadastrar");
@@ -83,7 +83,7 @@ function CategoryForm({ onClose }) {
         setShowToast(true);
         setTimeout(() => {
           setShowToast(false);
-        }, 5000);
+        }, 3000);
       }
     }
   }
